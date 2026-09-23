@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Network Game</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #080b14;
+    color: white;
+}
+
+header {
+    background: #101625;
+    padding: 18px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+}
+
+header h1 {
+    color: #00e5ff;
+}
+
+.hero {
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(135deg, #101a3a, #080b14);
+}
+
+.hero h2 {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: #aaa;
+    margin-bottom: 25px;
+}
+
+.search {
+    padding: 15px;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    margin-bottom: 20px;
+}
+
+.categories {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.categories button {
+    background: #1b263d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.games {
+    padding: 30px 5%;
+}
+
+.games h2 {
+    margin-bottom: 20px;
+}
+
+.game-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.game {
+    background: #111827;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    transition: 0.2s;
+}
+
+.game:hover {
+    transform: translateY(-5px);
+}
+
+.icon {
+    font-size: 55px;
+    margin-bottom: 15px;
+}
+
+.game h3 {
+    margin-bottom: 8px;
+}
+
+.game p {
+    color: #999;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.play {
+    background: #00e5ff;
+    border: none;
+    padding: 11px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.ad {
+    margin: 30px auto;
+    max-width: 700px;
+    height: 90px;
+    border: 1px dashed #555;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #777;
+}
+
+footer {
+    background: #101625;
+    text-align: center;
+    padding: 30px;
+    color: #888;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🎮 NETWORK GAME</h1>
+</header>
+
+<section class="hero">
+
+    <h2>Joue gratuitement</h2>
+
+    <p>
+        Découvre des jeux directement dans ton navigateur.
+    </p>
+
+    <input
+        class="search"
+        id="search"
+        type="text"
+        placeholder="🔎 Rechercher un jeu..."
+        onkeyup="searchGames()"
+    >
+
+    <div class="categories">
+        <button onclick="filterGames('all')">Tous</button>
+        <button onclick="filterGames('Action')">Action</button>
+        <button onclick="filterGames('Course')">Course</button>
+        <button onclick="filterGames('Puzzle')">Puzzle</button>
+        <button onclick="filterGames('Sport')">Sport</button>
+    </div>
+
+</section>
+
+<div class="ad">
+    ESPACE PUBLICITAIRE
+</div>
+
+<section class="games">
+
+    <h2>🔥 Jeux populaires</h2>
+
+    <div class="game-container" id="games">
+
+        <div class="game" data-category="Action">
+            <div class="icon">⚔️</div>
+            <h3>Battle Arena</h3>
+            <p>Action</p>
+            <button class="play" onclick="playGame('Battle Arena')">
+                JOUER
+            </button>
+        </div>
+
+        <div class="game" data-category="Course">
+            <div class="icon">🏎️</div>
+            <h3>Speed Racer</h3>
+            <p>Course</p>
+            <button class="play" onclick="playGame('Speed Racer')">
+                JOUER
+            </button>
+        </div>
+
+        <div class="game" data-category="Puzzle">
+            <div class="icon">🧩</div>
+            <h3>Brain Puzzle</h3>
+            <p>Puzzle</p>
+            <button class="play" onclick="playGame('Brain Puzzle')">
+                JOUER
+            </button>
+        </div>
+
+        <div class="game" data-category="Sport">
+            <div class="icon">⚽</div>
+            <h3>Football Star</h3>
+            <p>Sport</p>
+            <button class="play" onclick="playGame('Football Star')">
+                JOUER
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+<div class="ad">
+    ESPACE PUBLICITAIRE
+</div>
+
+<footer>
+
+    <h3>NETWORK GAME</h3>
+
+    <p>
+        © 2026 Network Game
+    </p>
+
+</footer>
+
+<script>
+
+function playGame(name) {
+
+    alert(
+        "🎮 " + name +
+        "\\n\\nLe jeu va bientôt commencer !"
+    );
+
+}
+
+function searchGames() {
+
+    let search =
+        document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+    let games =
+        document
+        .querySelectorAll(".game");
+
+    games.forEach(function(game) {
+
+        let name =
+            game
+            .querySelector("h3")
+            .textContent
+            .toLowerCase();
+
+        if (name.includes(search)) {
+
+            game.style.display = "block";
+
+        } else {
+
+            game.style.display = "none";
+
+        }
+
+    });
+
+}
+
+function filterGames(category) {
+
+    let games =
+        document
+        .querySelectorAll(".game");
+
+    games.forEach(function(game) {
+
+        if (
+            category === "all" ||
+            game.dataset.category === category
+        ) {
+
+            game.style.display = "block";
+
+        } else {
+
+            game.style.display = "none";
+
+        }
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
